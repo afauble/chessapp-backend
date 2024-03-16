@@ -1,8 +1,10 @@
-package api
+package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
-func Gin_url_setup() {
+func Gin_url_setup(port string) {
 	r := gin.Default()
 
 	r.GET("/hello", func(ctx *gin.Context) {
@@ -11,8 +13,10 @@ func Gin_url_setup() {
 		})
 	})
 
+	r.GET("/getLegalMoves")
+
 	r.POST("/game/start")
 	r.POST("/game/move")
 
-	r.Run(":8080")
+	r.Run(":" + port)
 }

@@ -1,0 +1,109 @@
+<mxfile host="Electron" modified="2024-03-08T22:22:39.558Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="LzuV3HGn7rTC_Jmw3Klj" version="23.1.5" type="device">
+  <diagram name="Page-1" id="bpJBWN-cVF_RQLDgMC3q">
+    <mxGraphModel dx="830" dy="611" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="BFDpXySPPGaANSekTu17-1" value="&lt;font style=&quot;font-size: 28px;&quot;&gt;Finding Legal Move Flow&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="235" y="40" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-2" target="BFDpXySPPGaANSekTu17-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-2" value="getLegalMoves" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="41" y="173" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-3" target="BFDpXySPPGaANSekTu17-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-3" value="Iterate through each piece of moving player" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="206" y="153" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-5" target="BFDpXySPPGaANSekTu17-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-5" target="BFDpXySPPGaANSekTu17-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-5" target="BFDpXySPPGaANSekTu17-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-5" target="BFDpXySPPGaANSekTu17-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-5" target="BFDpXySPPGaANSekTu17-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-5" target="BFDpXySPPGaANSekTu17-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-5" value="Call appropriate piece-move function" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="206" y="293" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-7" value="pawn" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="361" y="263" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-8" value="king" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="361" y="293" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-9" value="queen" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="361" y="323" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-10" value="knight" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="361" y="353" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-11" value="bishop" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="361" y="383" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-12" target="BFDpXySPPGaANSekTu17-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-12" value="rook" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="361" y="413" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-20" target="BFDpXySPPGaANSekTu17-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-20" value="grab from standard move library" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="361" y="483" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-22" target="BFDpXySPPGaANSekTu17-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-22" value="iterate through standard move int64" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="356.5" y="632" width="129" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-23" target="BFDpXySPPGaANSekTu17-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-23" target="BFDpXySPPGaANSekTu17-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-23" value="popBit" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="524" y="637" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-24" target="BFDpXySPPGaANSekTu17-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-24" value="checkIndexForAlly" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="524" y="687" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-28" value="grabbing the next active bit and send the index of that bit" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="684" y="614.5" width="120" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-30" value="checkIndexForEnemy" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="737" width="129" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BFDpXySPPGaANSekTu17-33" target="BFDpXySPPGaANSekTu17-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-33" value="addToMoveList" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="524" y="787" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BFDpXySPPGaANSekTu17-34" value="add bit index to a list" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="684" y="772" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
