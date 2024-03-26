@@ -1,28 +1,28 @@
 package helpers
 
-var standardKingMoveMap map[int8]uint64
-var standardQueenMoveMap map[int8]uint64
+var standardKnightMoveMap map[int8]uint64
 var standardRookMoveMap map[int8]uint64
 var standardBishopMoveMap map[int8]uint64
-var standardKnightMoveMap map[int8]uint64
-var standardPawnMoveMap map[int8]uint64
 
 func init() {
 	// Initialize Standard Move Maps
-	standardKingMoveMap = make(map[int8]uint64)
-	standardKingMoveMap = make(map[int8]uint64)
-	standardQueenMoveMap = make(map[int8]uint64)
+	standardKnightMoveMap = make(map[int8]uint64)
 	standardRookMoveMap = make(map[int8]uint64)
 	standardBishopMoveMap = make(map[int8]uint64)
-	standardKnightMoveMap = make(map[int8]uint64)
-	standardPawnMoveMap = make(map[int8]uint64)
 
 	// Populate Maps
 	createStandardKnightMoves()
+	createStandardRookMoves()
 }
 
 func GetStandardKnightMoves(index int8) uint64 {
 	return standardKnightMoveMap[index]
+}
+func GetStandardRookMoves(index int8) uint64 {
+	return standardRookMoveMap[index]
+}
+func GetStandardBishopMoves(index int8) uint64 {
+	return standardBishopMoveMap[index]
 }
 
 func createStandardKnightMoves() {
@@ -30,28 +30,63 @@ func createStandardKnightMoves() {
 		standardKnightMoveMap[i] = generateKnightMoves(i)
 	}
 }
+func createStandardRookMoves() {
+	for i := int8(0); i < 64; i++ {
+		standardRookMoveMap[i] = generateRookMoves(i)
+	}
+}
 
 func generateKnightMoves(index int8) uint64 {
-
 	// The change in index for each of the 8 knight moves
 	knightMoves := [8]int8{17, 15, 10, 6, -6, -10, -15, -17}
+	// Check if the move changed went to expected row
+	// Moves thats would go off the board can cause wrong indexes to be selected
+	knightRowChecks := map[int8]int8{
+		17: 2, 15: 2, 10: 1, 6: 1, -6: -1, -10: -1, -15: -2, -17: -2,
+	}
+	var moveSet [64]bool
+	var newIndex int8
+	var rowChange int8
+	for _, move := range knightMoves {
+		newIndex = index + move
+		rowChange = (newIndex / 8) - (index / 8)
+		if isWithinBoard(newIndex) && knightRowChecks[move] == rowChange {
+			moveSet[newIndex] = true
+		}
+	}
+
+	return createBitBoard(moveSet)
+}
+
+func generateRookMoves(index int8) uint64 {
 	var moveSet [64]bool
 
-	for _, move := range knightMoves {
-		if isWithinBoard(index + move) {
-			moveSet[index+move] = true
+	// Checking each of the four directions of the rook at the same time
+	indexUp := index
+	indexDown := index
+	indexLeft := index
+	indexRight := index
+	for i := int8(0); i < 8; i++ {
+		indexUp += 8
+		indexDown -= 8
+		indexLeft -= 1
+		indexRight += 1
+
+		if isWithinBoard(indexUp) {
+			moveSet[indexUp] = true
+		}
+		if isWithinBoard(indexDown) {
+			moveSet[indexDown] = true
+		}
+		if isWithinBoard(indexLeft) {
+			moveSet[indexLeft] = true
+		}
+		if isWithinBoard(indexRight) {
+			moveSet[indexRight] = true
 		}
 	}
 
-	// Create bitboard
-	var moveBitBoard uint64 = 0
-	for i := 63; i >= 0; i-- {
-		if moveSet[i] {
-			moveBitBoard += 1
-		}
-		moveBitBoard = moveBitBoard << 1
-	}
-	return moveBitBoard
+	return createBitBoard(moveSet)
 }
 
 func isWithinBoard(index int8) bool {
@@ -59,4 +94,14 @@ func isWithinBoard(index int8) bool {
 		return false
 	}
 	return true
+}
+func createBitBoard(moveSet [64]bool) uint64 {
+	var moveBitBoard uint64 = 0
+	for i := 63; i >= 0; i-- {
+		moveBitBoard = moveBitBoard << 1
+		if moveSet[i] {
+			moveBitBoard += 1
+		}
+	}
+	return moveBitBoard
 }
