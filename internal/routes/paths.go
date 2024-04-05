@@ -23,8 +23,11 @@ func Gin_url_setup(port string) {
 		index, _ := strconv.ParseInt(indexStr, 10, 8)
 		knightMoves := strconv.FormatInt(int64(helpers.GetStandardKnightMoves(int8(index))), 2)
 		rookMoves := strconv.FormatInt(int64(helpers.GetStandardRookMoves(int8(index))), 2)
+		bishopMoves := strconv.FormatInt(int64(helpers.GetStandardBishopMoves(int8(index))), 2)
 		testMoveMap["knight"] = knightMoves
 		testMoveMap["rook"] = rookMoves
+		testMoveMap["bishop"] = bishopMoves
+
 		ctx.IndentedJSON(http.StatusOK, testMoveMap)
 	})
 

@@ -13,6 +13,7 @@ func init() {
 	// Populate Maps
 	createStandardKnightMoves()
 	createStandardRookMoves()
+	createStandardBishopMoves()
 }
 
 func GetStandardKnightMoves(index int8) uint64 {
@@ -34,6 +35,69 @@ func createStandardRookMoves() {
 	for i := int8(0); i < 64; i++ {
 		standardRookMoveMap[i] = generateRookMoves(i)
 	}
+}
+func createStandardBishopMoves() {
+	for i := int8(0); i < 64; i++ {
+		standardBishopMoveMap[i] = generateBishopMoves(i)
+	}
+}
+
+func generateBishopMoves(index int8) uint64 {
+	var moveSet [64]bool
+
+	// Moving Up-Left
+	newIndex := index + 9
+	rank := index / 8
+	for isWithinBoard(newIndex) {
+		if (newIndex / 8) == (rank + 1) {
+			moveSet[newIndex] = true
+			rank = newIndex / 8
+			newIndex += 9
+		} else {
+			break
+		}
+	}
+
+	// Moving Up-Right
+	newIndex = index + 7
+	rank = index / 8
+	for isWithinBoard(newIndex) {
+		if (newIndex / 8) == (rank + 1) {
+			moveSet[newIndex] = true
+			rank = newIndex / 8
+			newIndex += 7
+		} else {
+			break
+		}
+	}
+
+	// Moving Down-Left
+	newIndex = index - 7
+	rank = index / 8
+	for isWithinBoard(newIndex) {
+		if (newIndex / 8) == (rank - 1) {
+			moveSet[newIndex] = true
+			rank = newIndex / 8
+			newIndex -= 7
+		} else {
+			break
+		}
+	}
+
+	// Moving Down-Right
+	newIndex = index - 9
+	rank = index / 8
+	for isWithinBoard(newIndex) {
+		if (newIndex / 8) == (rank - 1) {
+			moveSet[newIndex] = true
+			rank = newIndex / 8
+			newIndex -= 9
+		} else {
+			break
+		}
+	}
+
+	return createBitBoard(moveSet)
 }
 
 func generateKnightMoves(index int8) uint64 {
@@ -66,6 +130,9 @@ func generateRookMoves(index int8) uint64 {
 	indexDown := index
 	indexLeft := index
 	indexRight := index
+	// Making sure not to include numbers "off the board"
+	var rank int8 = index / 8
+
 	for i := int8(0); i < 8; i++ {
 		indexUp += 8
 		indexDown -= 8
@@ -78,10 +145,10 @@ func generateRookMoves(index int8) uint64 {
 		if isWithinBoard(indexDown) {
 			moveSet[indexDown] = true
 		}
-		if isWithinBoard(indexLeft) {
+		if isWithinBoard(indexLeft) && (indexLeft/8) == rank {
 			moveSet[indexLeft] = true
 		}
-		if isWithinBoard(indexRight) {
+		if isWithinBoard(indexRight) && (indexRight/8) == rank {
 			moveSet[indexRight] = true
 		}
 	}
