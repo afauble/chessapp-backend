@@ -23,16 +23,15 @@ func init() {
 	standardBlackPawnAttackMap = make(map[int8]uint64)
 
 	// Populate Maps
-	createStandardKnightMoves()
-	createStandardRookMoves()
-	createStandardBishopMoves()
-	createStandardQueenMoves()
-	createStandardKingMoves()
-	createStandardWhitePawnMoves()
-	createStandardBlackPawnMoves()
-	createStandardWhitePawnAttacks()
-	createStandardBlackPawnAttacks()
-
+	populateMoveMap(standardKnightMoveMap, generateKnightMoves)
+	populateMoveMap(standardBishopMoveMap, generateBishopMoves)
+	populateMoveMap(standardRookMoveMap, generateRookMoves)
+	populateMoveMap(standardQueenMoveMap, generateQueenMoves)
+	populateMoveMap(standardKingMoveMap, generateKingMoves)
+	populateMoveMap(standardWhitePawnMoveMap, generateWhitePawnMoves)
+	populateMoveMap(standardBlackPawnMoveMap, generateBlackPawnMoves)
+	populateMoveMap(standardWhitePawnAttackMap, generateWhitePawnAttacks)
+	populateMoveMap(standardBlackPawnAttackMap, generateBlackPawnAttacks)
 }
 
 func GetStandardKnightMoves(index int8) uint64 {
@@ -63,49 +62,9 @@ func GetStandardBlackPawnAttacks(index int8) uint64 {
 	return standardBlackPawnAttackMap[index]
 }
 
-func createStandardKnightMoves() {
+func populateMoveMap(moveMap map[int8]uint64, generateMovesFunc func(index int8) uint64) {
 	for i := int8(0); i < 64; i++ {
-		standardKnightMoveMap[i] = generateKnightMoves(i)
-	}
-}
-func createStandardRookMoves() {
-	for i := int8(0); i < 64; i++ {
-		standardRookMoveMap[i] = generateRookMoves(i)
-	}
-}
-func createStandardBishopMoves() {
-	for i := int8(0); i < 64; i++ {
-		standardBishopMoveMap[i] = generateBishopMoves(i)
-	}
-}
-func createStandardQueenMoves() {
-	for i := int8(0); i < 64; i++ {
-		standardQueenMoveMap[i] = generateQueenMoves(i)
-	}
-}
-func createStandardKingMoves() {
-	for i := int8(0); i < 64; i++ {
-		standardKingMoveMap[i] = generateKingMoves(i)
-	}
-}
-func createStandardWhitePawnMoves() {
-	for i := int8(0); i < 64; i++ {
-		standardWhitePawnMoveMap[i] = generateWhitePawnMoves(i)
-	}
-}
-func createStandardWhitePawnAttacks() {
-	for i := int8(0); i < 64; i++ {
-		standardWhitePawnAttackMap[i] = generateWhitePawnAttacks(i)
-	}
-}
-func createStandardBlackPawnMoves() {
-	for i := int8(0); i < 64; i++ {
-		standardBlackPawnMoveMap[i] = generateBlackPawnMoves(i)
-	}
-}
-func createStandardBlackPawnAttacks() {
-	for i := int8(0); i < 64; i++ {
-		standardBlackPawnAttackMap[i] = generateBlackPawnAttacks(i)
+		moveMap[i] = generateMovesFunc(i)
 	}
 }
 
