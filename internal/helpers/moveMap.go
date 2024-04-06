@@ -19,6 +19,7 @@ func init() {
 	createStandardRookMoves()
 	createStandardBishopMoves()
 	createStandardQueenMoves()
+	createStandardKingMoves()
 }
 
 func GetStandardKnightMoves(index int8) uint64 {
@@ -34,7 +35,7 @@ func GetStandardQueenMoves(index int8) uint64 {
 	return standardQueenMoveMap[index]
 }
 func GetStandardKingMoves(index int8) uint64 {
-	return standardQueenMoveMap[index]
+	return standardKingMoveMap[index]
 }
 
 func createStandardKnightMoves() {
@@ -56,6 +57,32 @@ func createStandardQueenMoves() {
 	for i := int8(0); i < 64; i++ {
 		standardQueenMoveMap[i] = generateQueenMoves(i)
 	}
+}
+func createStandardKingMoves() {
+	for i := int8(0); i < 64; i++ {
+		standardKingMoveMap[i] = generateKingMoves(i)
+	}
+}
+
+func generateKingMoves(index int8) uint64 {
+	// The change in index for each of the 8 king moves
+	kingMoves := [8]int8{9, 8, 7, 1, -1, -7, -8, -9}
+	// Check if the move changed went to expected rank
+	// Moves thats would go off the board can cause wrong indexes to be selected
+	kingRankChecks := map[int8]int8{
+		9: 1, 8: 1, 7: 1, 1: 0, -1: 0, -7: -1, -8: -1, -9: -1,
+	}
+	var moveSet [64]bool
+	var newIndex int8
+	var rankChange int8
+	for _, move := range kingMoves {
+		newIndex = index + move
+		rankChange = (newIndex / 8) - (index / 8)
+		if isWithinBoard(newIndex) && kingRankChecks[move] == rankChange {
+			moveSet[newIndex] = true
+		}
+	}
+	return createBitBoard(moveSet)
 }
 
 func generateQueenMoves(index int8) uint64 {
@@ -126,18 +153,18 @@ func generateBishopMoves(index int8) uint64 {
 func generateKnightMoves(index int8) uint64 {
 	// The change in index for each of the 8 knight moves
 	knightMoves := [8]int8{17, 15, 10, 6, -6, -10, -15, -17}
-	// Check if the move changed went to expected row
+	// Check if the move changed went to expected rank
 	// Moves thats would go off the board can cause wrong indexes to be selected
-	knightRowChecks := map[int8]int8{
+	knightRankChecks := map[int8]int8{
 		17: 2, 15: 2, 10: 1, 6: 1, -6: -1, -10: -1, -15: -2, -17: -2,
 	}
 	var moveSet [64]bool
 	var newIndex int8
-	var rowChange int8
+	var rankChange int8
 	for _, move := range knightMoves {
 		newIndex = index + move
-		rowChange = (newIndex / 8) - (index / 8)
-		if isWithinBoard(newIndex) && knightRowChecks[move] == rowChange {
+		rankChange = (newIndex / 8) - (index / 8)
+		if isWithinBoard(newIndex) && knightRankChecks[move] == rankChange {
 			moveSet[newIndex] = true
 		}
 	}
