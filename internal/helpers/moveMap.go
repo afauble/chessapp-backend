@@ -5,6 +5,10 @@ var standardRookMoveMap map[int8]uint64
 var standardBishopMoveMap map[int8]uint64
 var standardQueenMoveMap map[int8]uint64
 var standardKingMoveMap map[int8]uint64
+var standardWhitePawnMoveMap map[int8]uint64
+var standardWhitePawnAttackMap map[int8]uint64
+var standardBlackPawnMoveMap map[int8]uint64
+var standardBlackPawnAttackMap map[int8]uint64
 
 func init() {
 	// Initialize Standard Move Maps
@@ -13,6 +17,10 @@ func init() {
 	standardBishopMoveMap = make(map[int8]uint64)
 	standardQueenMoveMap = make(map[int8]uint64)
 	standardKingMoveMap = make(map[int8]uint64)
+	standardWhitePawnMoveMap = make(map[int8]uint64)
+	standardWhitePawnAttackMap = make(map[int8]uint64)
+	standardBlackPawnMoveMap = make(map[int8]uint64)
+	standardBlackPawnAttackMap = make(map[int8]uint64)
 
 	// Populate Maps
 	createStandardKnightMoves()
@@ -20,6 +28,11 @@ func init() {
 	createStandardBishopMoves()
 	createStandardQueenMoves()
 	createStandardKingMoves()
+	createStandardWhitePawnMoves()
+	createStandardBlackPawnMoves()
+	createStandardWhitePawnAttacks()
+	createStandardBlackPawnAttacks()
+
 }
 
 func GetStandardKnightMoves(index int8) uint64 {
@@ -36,6 +49,18 @@ func GetStandardQueenMoves(index int8) uint64 {
 }
 func GetStandardKingMoves(index int8) uint64 {
 	return standardKingMoveMap[index]
+}
+func GetStandardWhitePawnMoves(index int8) uint64 {
+	return standardWhitePawnMoveMap[index]
+}
+func GetStandardWhitePawnAttacks(index int8) uint64 {
+	return standardWhitePawnAttackMap[index]
+}
+func GetStandardBlackPawnMoves(index int8) uint64 {
+	return standardBlackPawnMoveMap[index]
+}
+func GetStandardBlackPawnAttacks(index int8) uint64 {
+	return standardBlackPawnAttackMap[index]
 }
 
 func createStandardKnightMoves() {
@@ -62,6 +87,82 @@ func createStandardKingMoves() {
 	for i := int8(0); i < 64; i++ {
 		standardKingMoveMap[i] = generateKingMoves(i)
 	}
+}
+func createStandardWhitePawnMoves() {
+	for i := int8(0); i < 64; i++ {
+		standardWhitePawnMoveMap[i] = generateWhitePawnMoves(i)
+	}
+}
+func createStandardWhitePawnAttacks() {
+	for i := int8(0); i < 64; i++ {
+		standardWhitePawnAttackMap[i] = generateWhitePawnAttacks(i)
+	}
+}
+func createStandardBlackPawnMoves() {
+	for i := int8(0); i < 64; i++ {
+		standardBlackPawnMoveMap[i] = generateBlackPawnMoves(i)
+	}
+}
+func createStandardBlackPawnAttacks() {
+	for i := int8(0); i < 64; i++ {
+		standardBlackPawnAttackMap[i] = generateBlackPawnAttacks(i)
+	}
+}
+
+func generateWhitePawnMoves(index int8) uint64 {
+	var moveSet [64]bool
+	newIndex := index + 8
+	if index/8 == 1 {
+		moveSet[newIndex+8] = true
+	}
+	if isWithinBoard(newIndex) {
+		moveSet[newIndex] = true
+	}
+	// Handle promotions elsewhere
+	return createBitBoard(moveSet)
+}
+
+func generateWhitePawnAttacks(index int8) uint64 {
+	var moveSet [64]bool
+	newRank := (index / 8) + 1
+	newIndexLeft := index + 7
+	newIndexRight := index + 9
+	if isWithinBoard(newIndexLeft) && (newIndexLeft/8) == newRank {
+		moveSet[newIndexLeft] = true
+	}
+	if isWithinBoard(newIndexRight) && (newIndexRight/8) == newRank {
+		moveSet[newIndexRight] = true
+	}
+	// Handle en passant elsewhere
+	return createBitBoard(moveSet)
+}
+
+func generateBlackPawnMoves(index int8) uint64 {
+	var moveSet [64]bool
+	newIndex := index - 8
+	if index/8 == 7 {
+		moveSet[newIndex-8] = true
+	}
+	if isWithinBoard(newIndex) {
+		moveSet[newIndex] = true
+	}
+	// Handle promotions elsewhere
+	return createBitBoard(moveSet)
+}
+
+func generateBlackPawnAttacks(index int8) uint64 {
+	var moveSet [64]bool
+	newRank := (index / 8) - 1
+	newIndexLeft := index - 7
+	newIndexRight := index - 9
+	if isWithinBoard(newIndexLeft) && (newIndexLeft/8) == newRank {
+		moveSet[newIndexLeft] = true
+	}
+	if isWithinBoard(newIndexRight) && (newIndexRight/8) == newRank {
+		moveSet[newIndexRight] = true
+	}
+	// Handle en passant elsewhere
+	return createBitBoard(moveSet)
 }
 
 func generateKingMoves(index int8) uint64 {

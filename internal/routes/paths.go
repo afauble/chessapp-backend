@@ -26,11 +26,19 @@ func Gin_url_setup(port string) {
 		bishopMoves := strconv.FormatUint(helpers.GetStandardBishopMoves(int8(index)), 2)
 		queenMoves := strconv.FormatUint(helpers.GetStandardQueenMoves(int8(index)), 2)
 		kingMoves := strconv.FormatUint(helpers.GetStandardKingMoves(int8(index)), 2)
+		whitePawnMoves := strconv.FormatUint(helpers.GetStandardWhitePawnMoves(int8(index)), 2)
+		blackPawnMoves := strconv.FormatUint(helpers.GetStandardBlackPawnMoves(int8(index)), 2)
+		whitePawnAttacks := strconv.FormatUint(helpers.GetStandardWhitePawnAttacks(int8(index)), 2)
+		blackPawnAttacks := strconv.FormatUint(helpers.GetStandardBlackPawnAttacks(int8(index)), 2)
 		testMoveMap["knight"] = knightMoves
 		testMoveMap["rook"] = rookMoves
 		testMoveMap["bishop"] = bishopMoves
 		testMoveMap["queen"] = queenMoves
 		testMoveMap["king"] = kingMoves
+		testMoveMap["pawnWM"] = whitePawnMoves
+		testMoveMap["pawnBM"] = blackPawnMoves
+		testMoveMap["pawnWA"] = whitePawnAttacks
+		testMoveMap["pawnBA"] = blackPawnAttacks
 
 		ctx.IndentedJSON(http.StatusOK, testMoveMap)
 	})
