@@ -3,17 +3,22 @@ package helpers
 var standardKnightMoveMap map[int8]uint64
 var standardRookMoveMap map[int8]uint64
 var standardBishopMoveMap map[int8]uint64
+var standardQueenMoveMap map[int8]uint64
+var standardKingMoveMap map[int8]uint64
 
 func init() {
 	// Initialize Standard Move Maps
 	standardKnightMoveMap = make(map[int8]uint64)
 	standardRookMoveMap = make(map[int8]uint64)
 	standardBishopMoveMap = make(map[int8]uint64)
+	standardQueenMoveMap = make(map[int8]uint64)
+	standardKingMoveMap = make(map[int8]uint64)
 
 	// Populate Maps
 	createStandardKnightMoves()
 	createStandardRookMoves()
 	createStandardBishopMoves()
+	createStandardQueenMoves()
 }
 
 func GetStandardKnightMoves(index int8) uint64 {
@@ -24,6 +29,12 @@ func GetStandardRookMoves(index int8) uint64 {
 }
 func GetStandardBishopMoves(index int8) uint64 {
 	return standardBishopMoveMap[index]
+}
+func GetStandardQueenMoves(index int8) uint64 {
+	return standardQueenMoveMap[index]
+}
+func GetStandardKingMoves(index int8) uint64 {
+	return standardQueenMoveMap[index]
 }
 
 func createStandardKnightMoves() {
@@ -41,11 +52,23 @@ func createStandardBishopMoves() {
 		standardBishopMoveMap[i] = generateBishopMoves(i)
 	}
 }
+func createStandardQueenMoves() {
+	for i := int8(0); i < 64; i++ {
+		standardQueenMoveMap[i] = generateQueenMoves(i)
+	}
+}
+
+func generateQueenMoves(index int8) uint64 {
+	bishopMoves := generateBishopMoves(index)
+	rookMoves := generateRookMoves(index)
+
+	return (bishopMoves | rookMoves)
+}
 
 func generateBishopMoves(index int8) uint64 {
 	var moveSet [64]bool
 
-	// Moving Up-Left
+	// Moving Up-Right
 	newIndex := index + 9
 	rank := index / 8
 	for isWithinBoard(newIndex) {
@@ -58,7 +81,7 @@ func generateBishopMoves(index int8) uint64 {
 		}
 	}
 
-	// Moving Up-Right
+	// Moving Up-Left
 	newIndex = index + 7
 	rank = index / 8
 	for isWithinBoard(newIndex) {
@@ -164,6 +187,7 @@ func isWithinBoard(index int8) bool {
 }
 func createBitBoard(moveSet [64]bool) uint64 {
 	var moveBitBoard uint64 = 0
+
 	for i := 63; i >= 0; i-- {
 		moveBitBoard = moveBitBoard << 1
 		if moveSet[i] {
