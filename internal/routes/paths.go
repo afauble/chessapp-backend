@@ -43,6 +43,8 @@ func Gin_url_setup(port string) {
 		ctx.IndentedJSON(http.StatusOK, testMoveMap)
 	})
 
+	r.GET("/startingPosition", getStartingPosition)
+
 	r.POST("/game/start")
 	r.POST("/game/move")
 
